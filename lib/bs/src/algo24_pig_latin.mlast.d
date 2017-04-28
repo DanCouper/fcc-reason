@@ -1,0 +1,1 @@
+src/algo24_pig_latin.cmj :

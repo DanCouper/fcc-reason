@@ -1,0 +1,13 @@
+{
+  "name": "fcc-reason",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "bsb -w",
+    "build": "bsb"
+  },
+  "devDependencies": {
+    "bs-platform": "^1.7.1"
+  }
+}

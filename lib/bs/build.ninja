@@ -1,0 +1,186 @@
+ninja_required_version = 1.5.1 
+bs_package_flags = -bs-package-name fcc-reason
+src_root_dir = /Users/danielcouper/Projects/Prototypes/fcc-reason
+bsc = /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/bin/bsc.exe
+bsdep = /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/bin/bsb_helper.exe
+ocamllex = ocamllex.opt
+bsc_flags = -nostdlib -I /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/lib/ocaml -no-alias-deps -color always -w -40+6+7+27+32..39+44+45
+ppx_flags = 
+bs_package_includes = 
+bs_package_dev_includes = 
+refmt = /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/bin/refmt.exe
+reason_react_jsx = 
+refmt_flags = --print binary
+bsb_dir_group = 0
+bsc_lib_includes = -I src
+rule build_ast_and_deps_from_reason_impl
+  command = ${bsc} -pp "${refmt} ${refmt_flags}" ${reason_react_jsx}  ${ppx_flags} ${bsc_flags} -c -o ${out} -bs-syntax-only -bs-binary-ast -impl ${in}
+  description = [34mBuilding[39m [2m${out}[22m
+build src/algo09_find.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo09_find.re
+rule build_deps
+  command = ${bsdep} -g ${bsb_dir_group} -MD ${in}
+  description = [34mBuilding[39m [2m${out}[22m
+build src/algo09_find.mlast.d : build_deps src/algo09_find.mlast
+rule build_cmj_cmi
+  command = ${bsc} ${bs_package_flags} -bs-assume-no-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include ${bs_package_includes} ${bsc_lib_includes} ${bsc_extra_includes} ${bsc_flags} -o ${in} -c  ${in} ${postbuild}
+  depfile = ${in}.d
+  description = [34mBuilding[39m [2m${out}[22m
+build src/algo09_find.cmj $src_root_dir/lib/js/src/algo09_find.js src/algo09_find.cmi : build_cmj_cmi src/algo09_find.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo15_chunk.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo15_chunk.re
+build src/algo15_chunk.mlast.d : build_deps src/algo15_chunk.mlast
+build src/algo15_chunk.cmj $src_root_dir/lib/js/src/algo15_chunk.js src/algo15_chunk.cmi : build_cmj_cmi src/algo15_chunk.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo30_sum_fibs.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo30_sum_fibs.re
+build src/algo30_sum_fibs.mlast.d : build_deps src/algo30_sum_fibs.mlast
+build src/algo30_sum_fibs.cmj $src_root_dir/lib/js/src/algo30_sum_fibs.js src/algo30_sum_fibs.cmi : build_cmj_cmi src/algo30_sum_fibs.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo16_sum_range.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo16_sum_range.re
+build src/algo16_sum_range.mlast.d : build_deps src/algo16_sum_range.mlast
+build src/algo16_sum_range.cmj $src_root_dir/lib/js/src/algo16_sum_range.js src/algo16_sum_range.cmi : build_cmj_cmi src/algo16_sum_range.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo24_pig_latin.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo24_pig_latin.re
+build src/algo24_pig_latin.mlast.d : build_deps src/algo24_pig_latin.mlast
+build src/algo24_pig_latin.cmj $src_root_dir/lib/js/src/algo24_pig_latin.js src/algo24_pig_latin.cmi : build_cmj_cmi src/algo24_pig_latin.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo26_dna_pairs.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo26_dna_pairs.re
+build src/algo26_dna_pairs.mlast.d : build_deps src/algo26_dna_pairs.mlast
+build src/algo26_dna_pairs.cmj $src_root_dir/lib/js/src/algo26_dna_pairs.js src/algo26_dna_pairs.cmi : build_cmj_cmi src/algo26_dna_pairs.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo10_is_boolean.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo10_is_boolean.re
+build src/algo10_is_boolean.mlast.d : build_deps src/algo10_is_boolean.mlast
+build src/algo10_is_boolean.cmj $src_root_dir/lib/js/src/algo10_is_boolean.js src/algo10_is_boolean.cmi : build_cmj_cmi src/algo10_is_boolean.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo31_sum_primes.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo31_sum_primes.re
+build src/algo31_sum_primes.mlast.d : build_deps src/algo31_sum_primes.mlast
+build src/algo31_sum_primes.cmj $src_root_dir/lib/js/src/algo31_sum_primes.js src/algo31_sum_primes.cmi : build_cmj_cmi src/algo31_sum_primes.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo33_drop_until.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo33_drop_until.re
+build src/algo33_drop_until.mlast.d : build_deps src/algo33_drop_until.mlast
+build src/algo33_drop_until.cmj $src_root_dir/lib/js/src/algo33_drop_until.js src/algo33_drop_until.cmi : build_cmj_cmi src/algo33_drop_until.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo21_spinal_case.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo21_spinal_case.re
+build src/algo21_spinal_case.mlast.d : build_deps src/algo21_spinal_case.mlast
+build src/algo21_spinal_case.cmj $src_root_dir/lib/js/src/algo21_spinal_case.js src/algo21_spinal_case.cmi : build_cmj_cmi src/algo21_spinal_case.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo28_sorted_union.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo28_sorted_union.re
+build src/algo28_sorted_union.mlast.d : build_deps src/algo28_sorted_union.mlast
+build src/algo28_sorted_union.cmj $src_root_dir/lib/js/src/algo28_sorted_union.js src/algo28_sorted_union.cmi : build_cmj_cmi src/algo28_sorted_union.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo34_flatten_list.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo34_flatten_list.re
+build src/algo34_flatten_list.mlast.d : build_deps src/algo34_flatten_list.mlast
+build src/algo34_flatten_list.cmj $src_root_dir/lib/js/src/algo34_flatten_list.js src/algo34_flatten_list.cmi : build_cmj_cmi src/algo34_flatten_list.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo07_repeat_string.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo07_repeat_string.re
+build src/algo07_repeat_string.mlast.d : build_deps src/algo07_repeat_string.mlast
+build src/algo07_repeat_string.cmj $src_root_dir/lib/js/src/algo07_repeat_string.js src/algo07_repeat_string.cmi : build_cmj_cmi src/algo07_repeat_string.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo18_is_palindrome.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo18_is_palindrome.re
+build src/algo18_is_palindrome.mlast.d : build_deps src/algo18_is_palindrome.mlast
+build src/algo18_is_palindrome.cmj $src_root_dir/lib/js/src/algo18_is_palindrome.js src/algo18_is_palindrome.cmi : build_cmj_cmi src/algo18_is_palindrome.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo23_caeser_cipher.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo23_caeser_cipher.re
+build src/algo23_caeser_cipher.mlast.d : build_deps src/algo23_caeser_cipher.mlast
+build src/algo23_caeser_cipher.cmj $src_root_dir/lib/js/src/algo23_caeser_cipher.js src/algo23_caeser_cipher.cmi : build_cmj_cmi src/algo23_caeser_cipher.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo17_diff_list_pair.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo17_diff_list_pair.re
+build src/algo17_diff_list_pair.mlast.d : build_deps src/algo17_diff_list_pair.mlast
+build src/algo17_diff_list_pair.cmj $src_root_dir/lib/js/src/algo17_diff_list_pair.js src/algo17_diff_list_pair.cmi : build_cmj_cmi src/algo17_diff_list_pair.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo22_roman_numerals.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo22_roman_numerals.re
+build src/algo22_roman_numerals.mlast.d : build_deps src/algo22_roman_numerals.mlast
+build src/algo22_roman_numerals.cmj $src_root_dir/lib/js/src/algo22_roman_numerals.js src/algo22_roman_numerals.cmi : build_cmj_cmi src/algo22_roman_numerals.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo35_convert_binary.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo35_convert_binary.re
+build src/algo35_convert_binary.mlast.d : build_deps src/algo35_convert_binary.mlast
+build src/algo35_convert_binary.cmj $src_root_dir/lib/js/src/algo35_convert_binary.js src/algo35_convert_binary.cmi : build_cmj_cmi src/algo35_convert_binary.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo08_truncate_string.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo08_truncate_string.re
+build src/algo08_truncate_string.mlast.d : build_deps src/algo08_truncate_string.mlast
+build src/algo08_truncate_string.cmj $src_root_dir/lib/js/src/algo08_truncate_string.js src/algo08_truncate_string.cmi : build_cmj_cmi src/algo08_truncate_string.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo02_reverse_a_string.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo02_reverse_a_string.re
+build src/algo02_reverse_a_string.mlast.d : build_deps src/algo02_reverse_a_string.mlast
+build src/algo02_reverse_a_string.cmj $src_root_dir/lib/js/src/algo02_reverse_a_string.js src/algo02_reverse_a_string.cmi : build_cmj_cmi src/algo02_reverse_a_string.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo14_includes_letters.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo14_includes_letters.re
+build src/algo14_includes_letters.mlast.d : build_deps src/algo14_includes_letters.mlast
+build src/algo14_includes_letters.cmj $src_root_dir/lib/js/src/algo14_includes_letters.js src/algo14_includes_letters.cmi : build_cmj_cmi src/algo14_includes_letters.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo37_arguments_optional.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo37_arguments_optional.re
+build src/algo37_arguments_optional.mlast.d : build_deps src/algo37_arguments_optional.mlast
+build src/algo37_arguments_optional.cmj $src_root_dir/lib/js/src/algo37_arguments_optional.js src/algo37_arguments_optional.cmi : build_cmj_cmi src/algo37_arguments_optional.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo01_convert_temperature.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo01_convert_temperature.re
+build src/algo01_convert_temperature.mlast.d : build_deps src/algo01_convert_temperature.mlast
+build src/algo01_convert_temperature.cmj $src_root_dir/lib/js/src/algo01_convert_temperature.js src/algo01_convert_temperature.cmi : build_cmj_cmi src/algo01_convert_temperature.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo27_find_missing_letter.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo27_find_missing_letter.re
+build src/algo27_find_missing_letter.mlast.d : build_deps src/algo27_find_missing_letter.mlast
+build src/algo27_find_missing_letter.cmj $src_root_dir/lib/js/src/algo27_find_missing_letter.js src/algo27_find_missing_letter.cmi : build_cmj_cmi src/algo27_find_missing_letter.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo38_create_person_class.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo38_create_person_class.re
+build src/algo38_create_person_class.mlast.d : build_deps src/algo38_create_person_class.mlast
+build src/algo38_create_person_class.cmj $src_root_dir/lib/js/src/algo38_create_person_class.js src/algo38_create_person_class.cmi : build_cmj_cmi src/algo38_create_person_class.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo11_titlecase_a_sentence.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo11_titlecase_a_sentence.re
+build src/algo11_titlecase_a_sentence.mlast.d : build_deps src/algo11_titlecase_a_sentence.mlast
+build src/algo11_titlecase_a_sentence.cmj $src_root_dir/lib/js/src/algo11_titlecase_a_sentence.js src/algo11_titlecase_a_sentence.cmi : build_cmj_cmi src/algo11_titlecase_a_sentence.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo12_remove_falsey_values.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo12_remove_falsey_values.re
+build src/algo12_remove_falsey_values.mlast.d : build_deps src/algo12_remove_falsey_values.mlast
+build src/algo12_remove_falsey_values.cmj $src_root_dir/lib/js/src/algo12_remove_falsey_values.js src/algo12_remove_falsey_values.cmi : build_cmj_cmi src/algo12_remove_falsey_values.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo13_find_index_to_insert.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo13_find_index_to_insert.re
+build src/algo13_find_index_to_insert.mlast.d : build_deps src/algo13_find_index_to_insert.mlast
+build src/algo13_find_index_to_insert.cmj $src_root_dir/lib/js/src/algo13_find_index_to_insert.js src/algo13_find_index_to_insert.cmi : build_cmj_cmi src/algo13_find_index_to_insert.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo29_escape_html_entities.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo29_escape_html_entities.re
+build src/algo29_escape_html_entities.mlast.d : build_deps src/algo29_escape_html_entities.mlast
+build src/algo29_escape_html_entities.cmj $src_root_dir/lib/js/src/algo29_escape_html_entities.js src/algo29_escape_html_entities.cmi : build_cmj_cmi src/algo29_escape_html_entities.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo03_factorialise_a_number.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo03_factorialise_a_number.re
+build src/algo03_factorialise_a_number.mlast.d : build_deps src/algo03_factorialise_a_number.mlast
+build src/algo03_factorialise_a_number.cmj $src_root_dir/lib/js/src/algo03_factorialise_a_number.js src/algo03_factorialise_a_number.cmi : build_cmj_cmi src/algo03_factorialise_a_number.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo06_confirm_string_ending.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo06_confirm_string_ending.re
+build src/algo06_confirm_string_ending.mlast.d : build_deps src/algo06_confirm_string_ending.mlast
+build src/algo06_confirm_string_ending.cmj $src_root_dir/lib/js/src/algo06_confirm_string_ending.js src/algo06_confirm_string_ending.cmi : build_cmj_cmi src/algo06_confirm_string_ending.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo20_find_matching_records.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo20_find_matching_records.re
+build src/algo20_find_matching_records.mlast.d : build_deps src/algo20_find_matching_records.mlast
+build src/algo20_find_matching_records.cmj $src_root_dir/lib/js/src/algo20_find_matching_records.js src/algo20_find_matching_records.cmi : build_cmj_cmi src/algo20_find_matching_records.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo05_return_largest_numbers.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo05_return_largest_numbers.re
+build src/algo05_return_largest_numbers.mlast.d : build_deps src/algo05_return_largest_numbers.mlast
+build src/algo05_return_largest_numbers.cmj $src_root_dir/lib/js/src/algo05_return_largest_numbers.js src/algo05_return_largest_numbers.cmi : build_cmj_cmi src/algo05_return_largest_numbers.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo04_longest_word_in_a_string.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo04_longest_word_in_a_string.re
+build src/algo04_longest_word_in_a_string.mlast.d : build_deps src/algo04_longest_word_in_a_string.mlast
+build src/algo04_longest_word_in_a_string.cmj $src_root_dir/lib/js/src/algo04_longest_word_in_a_string.js src/algo04_longest_word_in_a_string.cmi : build_cmj_cmi src/algo04_longest_word_in_a_string.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo32_smallest_common_multiple.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo32_smallest_common_multiple.re
+build src/algo32_smallest_common_multiple.mlast.d : build_deps src/algo32_smallest_common_multiple.mlast
+build src/algo32_smallest_common_multiple.cmj $src_root_dir/lib/js/src/algo32_smallest_common_multiple.js src/algo32_smallest_common_multiple.cmi : build_cmj_cmi src/algo32_smallest_common_multiple.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo19_drop_multiple_list_values.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo19_drop_multiple_list_values.re
+build src/algo19_drop_multiple_list_values.mlast.d : build_deps src/algo19_drop_multiple_list_values.mlast
+build src/algo19_drop_multiple_list_values.cmj $src_root_dir/lib/js/src/algo19_drop_multiple_list_values.js src/algo19_drop_multiple_list_values.cmi : build_cmj_cmi src/algo19_drop_multiple_list_values.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo25_string_search_and_replace.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo25_string_search_and_replace.re
+build src/algo25_string_search_and_replace.mlast.d : build_deps src/algo25_string_search_and_replace.mlast
+build src/algo25_string_search_and_replace.cmj $src_root_dir/lib/js/src/algo25_string_search_and_replace.js src/algo25_string_search_and_replace.cmi : build_cmj_cmi src/algo25_string_search_and_replace.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo39_calculate_orbital_periods.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo39_calculate_orbital_periods.re
+build src/algo39_calculate_orbital_periods.mlast.d : build_deps src/algo39_calculate_orbital_periods.mlast
+build src/algo39_calculate_orbital_periods.cmj $src_root_dir/lib/js/src/algo39_calculate_orbital_periods.js src/algo39_calculate_orbital_periods.cmi : build_cmj_cmi src/algo39_calculate_orbital_periods.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/non_fcc_algo01_almost_increasing_seq.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/non_fcc_algo01_almost_increasing_seq.re
+build src/non_fcc_algo01_almost_increasing_seq.mlast.d : build_deps src/non_fcc_algo01_almost_increasing_seq.mlast
+build src/non_fcc_algo01_almost_increasing_seq.cmj $src_root_dir/lib/js/src/non_fcc_algo01_almost_increasing_seq.js src/non_fcc_algo01_almost_increasing_seq.cmi : build_cmj_cmi src/non_fcc_algo01_almost_increasing_seq.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build src/algo36_reject_if_false_property_found.mlast : build_ast_and_deps_from_reason_impl $src_root_dir/src/algo36_reject_if_false_property_found.re
+build src/algo36_reject_if_false_property_found.mlast.d : build_deps src/algo36_reject_if_false_property_found.mlast
+build src/algo36_reject_if_false_property_found.cmj $src_root_dir/lib/js/src/algo36_reject_if_false_property_found.js src/algo36_reject_if_false_property_found.cmi : build_cmj_cmi src/algo36_reject_if_false_property_found.mlast
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/src
+build build.ninja : phony  ||  src/algo36_reject_if_false_property_found.mlast.d src/non_fcc_algo01_almost_increasing_seq.mlast.d src/algo39_calculate_orbital_periods.mlast.d src/algo25_string_search_and_replace.mlast.d src/algo19_drop_multiple_list_values.mlast.d src/algo32_smallest_common_multiple.mlast.d src/algo04_longest_word_in_a_string.mlast.d src/algo05_return_largest_numbers.mlast.d src/algo20_find_matching_records.mlast.d src/algo06_confirm_string_ending.mlast.d src/algo03_factorialise_a_number.mlast.d src/algo29_escape_html_entities.mlast.d src/algo13_find_index_to_insert.mlast.d src/algo12_remove_falsey_values.mlast.d src/algo11_titlecase_a_sentence.mlast.d src/algo38_create_person_class.mlast.d src/algo27_find_missing_letter.mlast.d src/algo01_convert_temperature.mlast.d src/algo37_arguments_optional.mlast.d src/algo14_includes_letters.mlast.d src/algo02_reverse_a_string.mlast.d src/algo08_truncate_string.mlast.d src/algo35_convert_binary.mlast.d src/algo22_roman_numerals.mlast.d src/algo17_diff_list_pair.mlast.d src/algo23_caeser_cipher.mlast.d src/algo18_is_palindrome.mlast.d src/algo07_repeat_string.mlast.d src/algo34_flatten_list.mlast.d src/algo28_sorted_union.mlast.d src/algo21_spinal_case.mlast.d src/algo33_drop_until.mlast.d src/algo31_sum_primes.mlast.d src/algo10_is_boolean.mlast.d src/algo26_dna_pairs.mlast.d src/algo24_pig_latin.mlast.d src/algo16_sum_range.mlast.d src/algo30_sum_fibs.mlast.d src/algo15_chunk.mlast.d src/algo09_find.mlast.d
