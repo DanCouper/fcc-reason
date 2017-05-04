@@ -1,1 +1,0 @@
-src/algo08_truncate_string.cmj :

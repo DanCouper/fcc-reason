@@ -1,0 +1,1 @@
+src/algorithms/algo32_smallest_common_multiple.cmj :

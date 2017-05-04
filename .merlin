@@ -5,4 +5,6 @@ B /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/li
 FLG -nostdlib -no-alias-deps -color always -w -40+6+7+27+32..39+44+45
 S src
 B lib/bs/src
+S src/algorithms
+B lib/bs/src/algorithms
 ####BSB GENERATED: NO EDIT}

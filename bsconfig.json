@@ -1,4 +1,9 @@
 {
   "name": "fcc-reason",
-  "sources": "src"
+  "sources": {
+    "dir": "src",
+    "subdirs": [{
+        "dir": "algorithms"
+      }]
+    }
 }
