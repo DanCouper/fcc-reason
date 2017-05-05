@@ -1,9 +1,17 @@
 {
   "name": "fcc-reason",
+  "reason" : { "react-jsx" : true},
+  "bs-dependencies": ["reason-react", "reason-js"],
+  "package-specs": ["es6"],
   "sources": {
     "dir": "src",
-    "subdirs": [{
+    "subdirs": [
+      {
         "dir": "algorithms"
-      }]
-    }
+      },
+      {
+        "dir": "react"
+      }
+    ]
+  }
 }

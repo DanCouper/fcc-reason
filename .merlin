@@ -1,10 +1,17 @@
 ####{BSB GENERATED: NO EDIT
+FLG -ppx /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/bin/reactjs_jsx_ppx.exe
 FLG -ppx /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/bin/bsppx.exe
 S /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/lib/ocaml
 B /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/bs-platform/lib/ocaml
 FLG -nostdlib -no-alias-deps -color always -w -40+6+7+27+32..39+44+45
+S /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/reason-react/lib/ocaml
+B /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/reason-react/lib/ocaml
+S /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/reason-js/lib/ocaml
+B /Users/danielcouper/Projects/Prototypes/fcc-reason/node_modules/reason-js/lib/ocaml
 S src
 B lib/bs/src
+S src/react
+B lib/bs/src/react
 S src/algorithms
 B lib/bs/src/algorithms
 ####BSB GENERATED: NO EDIT}

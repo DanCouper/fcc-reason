@@ -10,7 +10,7 @@ let recursiveFind list pred => {
   let rec find l =>
     switch l {
     | [] => false
-    | [hd, ...tl] when pred hd => hd
+    | [hd, _] when pred hd => hd
     | [_, ...tl] => find tl
     };
   find list
