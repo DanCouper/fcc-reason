@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "bsb -w",
-    "build": "bsb"
+    "start": "bsb -make-world -w",
+    "build": "bsb -make-world"
   },
   "devDependencies": {
     "bs-platform": "^1.7.1"
