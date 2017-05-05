@@ -21,7 +21,7 @@ The call to `yarn start` will kick off a watch server.
 
 ## Dev env
 
-[http://facebook.github.io/reason/jsWorkflow.html](JS workflow is here) -
+[JS workflow is here](http://facebook.github.io/reason/jsWorkflow.html) -
 I use Atom and have a Spacemacs-like setup, and Nuclide screwed that up,
 so I installed everything seperately which is a pain, but need to
 just keep following links for each package & installing relevant
@@ -29,5 +29,5 @@ opam dependencies for each one and it seems to work in the end.
 
 ## Useful links
 
-- [https://facebook.github.io/reason/mlCompared.html#reason-and-ocaml-various-differences](Comparison of OCaml and Reason, helpful when translating OCaml guides to work with Reason)
-- [http://bloomberg.github.io/bucklescript/api/Js.html](The Bucklescript Js module API)
+- [Comparison of OCaml and Reason, helpful when translating OCaml guides to work with Reason](https://facebook.github.io/reason/mlCompared.html#reason-and-ocaml-various-differences)
+- [The Bucklescript Js module API](http://bloomberg.github.io/bucklescript/api/Js.html)
