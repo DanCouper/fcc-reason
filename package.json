@@ -4,11 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "bsb -make-world -w",
+    "start": "bsb -make-world -w 2>&1 | berror --path-to-refmttype refmttype",
     "build": "bsb -make-world"
   },
   "devDependencies": {
-    "bs-platform": "^1.7.1"
+    "bs-platform": "^1.7.1",
+    "dependency-env": "^0.1.1",
+    "nopam": "^0.1.0",
+    "ocamlBetterErrors": "^0.1.1"
   },
   "dependencies": {
     "react": "^15.5.4",

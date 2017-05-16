@@ -57,6 +57,24 @@ type calculatorDigit =
   | Nine
   | DecimalSeperator;
 
+let mapDigitToString =
+  fun
+  | Zero => "0"
+  | One => "1"
+  | Two => "2"
+  | Three => "3"
+  | Four => "4"
+  | Five => "5"
+  | Six => "6"
+  | Seven => "7"
+  | Eight => "8"
+  | Nine => "9"
+  | DecimalSeperator => ".";
+
+type calculatorNumber =
+  | Float
+  | Integer;
+
 type calculatorOperator =
   | Exp
   | Mul
@@ -66,11 +84,12 @@ type calculatorOperator =
 
 type calculatorAction =
   | Clear
-  | Execute;
+  | Execute
+  | SwitchSign;
 
 type calculatorInput =
   | Digit calculatorDigit
-  | Number
+  | Number calculatorNumber
   | Action calculatorAction
   /* | Function */
   /* | FunctionSep */
@@ -82,20 +101,6 @@ let mapInputTypeToString inputType =>
   switch inputType {
   | LeftParen => "("
   | RightParen => ")"
-  | Digit d =>
-    switch d {
-    | Zero => "0"
-    | One => "1"
-    | Two => "2"
-    | Three => "3"
-    | Four => "4"
-    | Five => "5"
-    | Six => "6"
-    | Seven => "7"
-    | Eight => "8"
-    | Nine => "9"
-    | DecimalSeperator => "."
-    }
   | Operator o =>
     switch o {
     | Exp => "^"
@@ -112,104 +117,104 @@ let mapInputTypeToString inputType =>
  * core wrapper component. Needs to get
  * passed along through each core function.
  */
-type calculatorState = {
-  /**
-   * The tokenisedInput is modelled as a list of tuples
-   * of the form `(Type, stringRepresentation)`.
-   * This means that:
-   *
-   *    - on execution, the list can be easily parsed
-   *      by the shunting yard
-   *    - on display, the strings can simply be joined
-   *      to give a visual representation of the
-   *      calculation.
-   */
-  tokenisedInputs: list (calculatorInput, string),
-  /**
-   * At some point, the input has to be displayed,
-   * and that display can be a string for simplicity's sake:
-   */
-  display: string,
-  /**
-   * While a number is being entered, the
-   * input should _not_ be immediately added
-   * to tokenisedInput - it needs to be converted
-   * to a type Number.
-   * There can be multiple digits, so while
-   * input is of the type Digit, this list gets
-   * populated. Once non-digit input arrives,
-   * the list gets concatenated, and the resulting
-   * number added to the tokenised input:
-   */
-  numberBuilder: list string,
-  /**
-   * A number can have one decimal seperator;
-   * if this switches to true, and isNumericInput
-   * is also true, no more decimal seperators can
-   * be added.
-   */
-  hasDecimalSeperator: bool
-};
+/* type calculatorState = {} */
+
+/**
+ * The tokenisedInput is modelled as a list of tuples
+ * of the form `(Type, stringRepresentation)`.
+ * This means that:
+ *
+ *    - on execution, the list can be easily parsed
+ *      by the shunting yard
+ *    - on display, the strings can simply be joined
+ *      to give a visual representation of the
+ *      calculation.
+ */
+type tokenisedInputs = list (calculatorInput, string);
 
 
 /**
- * Triggered on an input of type Execute.
- * Takes current state of tokenisedInput and
- * runs the shunting yard.
+ * At some point, the input has to be displayed,
+ * and that display can be a string for simplicity's sake:
  */
-/* type calculate = tokenisedInputs => tokenisedInputs; */
+type display = string;
+
+
+type handleActionInput = (calculatorAction, tokenisedInputs) => tokenisedInputs;
+
+/**
+ * Special case has to be made for digits, as they come in
+ * character-by-character. The Digit type is never used in
+ * the tokenised list: it is always a type `Number Float/Integer`,
+ * which is created using the following rule:
+ *
+ *    - If the head of the tokenisedInputs is Number:
+ *      - If Digit is DecimalSeperator, and Number
+ *        is a Float, ignore.
+ *      - Else if Digit is DecimalSeperator, concat to
+ *        Number string and make Number a Float
+ *      - Else concat the string representation of Digit
+ *        to the Number string regardless of Number type.
+ *    - If the head of tokenisedInputs is not Number:
+ *      - If Digit is DecimalSeperator, create a new
+ *        Number of type Float and use `"0" ^ DecimalSeperator`
+ *        as the representation.
+ *      - Else create a new Number of type Integer and
+ *        use the string representation of the Digit type.
+ */
+type handleDigitInput = (calculatorDigit, tokenisedInputs) => tokenisedInputs;
+
+let handleDigitInput (digit, tokenisedInputs) =>
+  switch (digit, tokenisedInputs) {
+  | (DecimalSeperator, [(Number Float, _), _]) => tokenisedInputs
+  | (DecimalSeperator, [(Number Integer, numStr), ...rest]) => [
+      (Number Float, numStr ^ mapDigitToString DecimalSeperator),
+      ...rest
+    ]
+  | (d, [(Number n, numStr), ...rest]) => [(Number n, numStr ^ mapDigitToString d), ...rest]
+  | (DecimalSeperator, tokenisedInputs) => [
+      (Number Float, "0" ^ mapDigitToString DecimalSeperator),
+      ...tokenisedInputs
+    ]
+  | (d, tokenisedInputs) => [(Number Integer, mapDigitToString d), ...tokenisedInputs]
+  };
+
+/* type handleOperatorInput = (calculatorInput, tokenisedInputs) => tokenisedInputs;
+
+   let handleOperatorInput (calculatorInput, tokenisedInputs) =>
+     switch (calculatorInput, tokenisedInputs) {
+
+     }; */
 
 /**
  * Given an input, update the state accordingly.
  * Needs to use the flags within the state to
  * deal with numbers etc.
  */
-type updateInput = (calculatorInput, calculatorState) => calculatorState;
+type updateInput = (calculatorInput, tokenisedInputs) => tokenisedInputs;
 
-let updateInput (calculatorInput, calculatorState) => {
-  let {tokenisedInputs, display, numberBuilder, hasDecimalSeperator} = calculatorState;
-  switch calculatorInput {
-  | Digit d =>
-    let digit = mapInputTypeToString calculatorInput;
-    switch d {
-    | DecimalSeperator when hasDecimalSeperator => calculatorState
-    | DecimalSeperator => {
-        ...calculatorState,
-        display: display ^ digit,
-        numberBuilder: [digit, ...numberBuilder],
-        hasDecimalSeperator: true
-      }
-    | _ => {...calculatorState, display: display ^ digit, numberBuilder: [digit, ...numberBuilder]}
-    }
-  | _ when numberBuilder != [] =>
-    let num = List.fold_right (fun prev curr => prev ^ curr) numberBuilder "";
-    {
-      display: String.concat " " [display, num, mapInputTypeToString calculatorInput],
-      tokenisedInputs: [
-        (calculatorInput, mapInputTypeToString calculatorInput),
-        (Number, num),
-        ...tokenisedInputs
-      ],
-      numberBuilder: [],
-      hasDecimalSeperator: false
-    }
-  | _ => {
-      ...calculatorState,
-      display: String.concat " " [display, mapInputTypeToString calculatorInput],
-      tokenisedInputs: [
-        (calculatorInput, mapInputTypeToString calculatorInput),
-        ...tokenisedInputs
-      ]
-    }
-  }
-};
+let updateInput (input, tokenisedInputs) =>
+  switch (input, tokenisedInputs) {
+  | (Digit d, tokenisedInputs) => handleDigitInput (d, tokenisedInputs)
+  | (input, tokenisedInputs) => [(input, mapInputTypeToString input), ...tokenisedInputs]
+  };
 
 
 /**
  * On an update to the tokenisedInput,
  * just rebuild the display
  */
-type updateDisplayFromInput = calculatorState => calculatorState;
+type updateDisplayFromInput = tokenisedInputs => display;
+
+let updateDisplayFromInput tokenisedInputs => {
+  let rec updateLoop inputs display =>
+    switch inputs {
+    | [] => display
+    | [(_, str)] => updateLoop [] (str ^ " " ^ display)
+    | [(_, str), ...rest] => updateLoop rest (str ^ " " ^ display)
+    };
+  updateLoop tokenisedInputs ""
+};
 /**
  * Input to the Calculator builds up a list of
  * the form `(Token, string)` that represents
